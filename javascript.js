@@ -1,3 +1,14 @@
+var playerSelection;
+var playerWin = 0;
+var computerWin = 0;
+var newDiv = document.createElement("div");
+var currentDiv = document.getElementById("div1");
+var winContent = document.createTextNode("5 points. Game End. You win");
+var loseContent = document.createTextNode("5 points. Game End.ou lose");
+var tieContent = document.createTextNode("It is a tie");
+
+
+
 function getComputerChoice() {
     var randomNumber = Math.floor(Math.random()*3+1);
     if (randomNumber == 1 ){
@@ -36,21 +47,21 @@ function playRound(playerSelection, computerSelection) {
     }
 
 
-}
+}var playerbtn = document.addEventListener("click", game );
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        var playerSelection = prompt("Choose your weapon!");
-        var computerSelection = getComputerChoice();
+function game(e) {
+    var computerSelection = getComputerChoice();
+    playerSelection = e.target.id;
+    if (playerWin == 5) {
+        newDiv.appendChild(winContent);
+        document.body.insertBefore(newDiv, currentDiv);
+    } else if (computerWin == 5) {
+        newDiv.appendChild(loseContent);
+        document.body.insertBefore(newDiv, currentDiv);
+    } else {
         console.log(playRound(playerSelection, computerSelection));
     }
-    if (playerWin == computerWin) {
-        return "It is a tie";
-    } else if (playerWin > computerWin) {
-        return "You win this round";
-    } else {
-        return "You lose this round";
-    }
+    
 }
 
 function tie() {
@@ -67,9 +78,8 @@ function lose() {
     return "You lose";
 }
 
-var playerWin = 0;
-var computerWin = 0;
-console.log(game());
+
+
 
 
 
